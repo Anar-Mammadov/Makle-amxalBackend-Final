@@ -1,0 +1,36 @@
+﻿<!-- NEWS & EVENTS -->
+
+
+
+<div class="hero" style="        background-image: url(https://preview.colorlib.com/theme/warehouse/images/xhero_1.jpg.pagespeed.ic.aek8z5kvkt.webp);
+        background-size: cover;
+        height: 600px;
+        background-attachment: fixed;"></div>
+@model List<Blog>
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center newss">
+            <h2>
+                News & Events
+            </h2>
+        </div>
+    </div>
+    <div style="margin-top: 50px;" class="row ">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4 newscard mb-lg-4">
+
+                <div class="newsimage">
+                    <a asp-action="Details" asp-route-id="@item.Id"> 
+                        <img style="width: 100%;height: 80%;" src="./assets/images/@item.ImagePath" alt="">
+                    </a>
+                    <a class="newsa" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+                    <div class="meta mb-4">@item.Author <span class="mx-2">•</span>@item.CreatedData<span class="mx-2">•</span> <a style="color: #37cfa2;" asp-action="Details" asp-route-id="@item.Id">News</a></div>
+                </div>
+
+
+            </div>
+        }
+
+    </div>
+</div>

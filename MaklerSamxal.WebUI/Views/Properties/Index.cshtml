@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Product>
+<!-- cards -->
+<div class="hero" style="        background-image: url(https://preview.colorlib.com/theme/warehouse/images/xhero_1.jpg.pagespeed.ic.aek8z5kvkt.webp);
+        background-size: cover;
+        height: 600px;
+        background-attachment: fixed;"></div>
+    <div class="container mt-5">
+        <div class="row large-gutters">
+            @foreach (var item in Model)
+            {
+            <div class="col-md-6 col-lg-4 mb-5 mb-lg-5 ">
+                <div class="ftco-media-1">
+                    <div class="ftco-media-1-inner">
+                        <a asp-action="Details" asp-route-id="@item.Id"class="d-inline-block mb-4">
+                            <img src="~/assets/images/@item.ImagePath" alt="FImageo" class="img-fluid">
+                        </a>
+                        <div class="ftco-media-details">
+                            <h3>@item.Title</h3>
+                            <p>@item.Location.</p>
+                            <strong>@item.Price</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+            
+            
+        </div>
+    </div>

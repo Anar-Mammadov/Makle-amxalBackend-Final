@@ -1,0 +1,282 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/assets/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="~/assets/css/style.css">
+
+    <title>MaklerSamxal</title>
+    @RenderSection("addcss", required: false);
+    <link href="~/libs/toastr.js/toastr.css" rel="stylesheet" />
+
+    <style>
+        .is-invalid {
+            border: 1px solid red
+        }
+
+            .is-invalid + span.error {
+                color: red;
+                font-size: 1rem;
+            }
+
+        .is-valid {
+            border: 1px solid teal;
+        }
+    </style>
+</head>
+<body style="margin-top:-26px">
+
+    <!-- .site-mobile-menu -->
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+
+
+
+    <div class="site-navbar-wrap">
+        <div class="site-navbar-top">
+            <div class="container py-3">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <div class="d-flex mr-auto">
+                            <a href="#" class="d-flex align-items-center mr-4">
+                                <span class="icon-envelope mr-2"></span>
+                                <span class="d-none d-md-inline-block">info@domain.com</span>
+                            </a>
+                            <a href="#" class="d-flex align-items-center mr-auto">
+                                <span class="icon-phone mr-2"></span>
+                                <span class="d-none d-md-inline-block">+1 234 4567 8910</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6 text-right">
+                        <div class="mr-auto">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a asp-controller="home" asp-action="Signin" class="p-2 pl-0">
+                                    <span>
+                                        @User.Identity.Name.ToUpper()
+                                    </span>
+                                </a>
+
+                                <a asp-controller="home" asp-action="Logout" class="p-2 pl-0">
+                                    <span>
+                                        Logout
+                                    </span>
+                                </a>
+
+                            }
+                            else
+                            {
+                                <a asp-controller="home" asp-action="Signin" class="p-2 pl-0">
+                                    <span>
+                                        Log In
+                                    </span>
+                                </a>
+
+                                <a asp-controller="home" asp-action="Register" class="p-2 pl-0">
+                                    <span>
+                                        Sign up
+                                    </span>
+                                </a>
+                            }
+                            <a href="#" class="p-2 pl-0"><span class="icon-twitter"></span></a>
+                            <a href="#" class="p-2 pl-0"><span class="icon-facebook"></span></a>
+                            <a href="#" class="p-2 pl-0"><span class="icon-linkedin"></span></a>
+                            <a href="#" class="p-2 pl-0"><span class="icon-instagram"></span></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-navbar site-navbar-target js-sticky-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-2">
+                        <h1 class="my-0 site-logo"><a href="index.html">WAREHOUSE</a></h1>
+                    </div>
+                    <div class="col-10">
+                        <nav class="site-navigation text-right" role="navigation">
+                            <div class="container">
+                                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
+
+                                <ul class="site-menu main-menu js-clone-nav d-none d-lg-block">
+                                    <li class="active"><a asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
+                                    <li><a asp-controller="Properties" asp-action="Index" class="nav-link">PROPERTIES</a></li>
+                                    <li><a asp-controller="Home" asp-action="Agents" class="nav-link">AGENTS</a></li>
+                                    <li><a asp-controller="Home" asp-action="About" class="nav-link">ABOUT</a></li>
+                                    <li><a asp-controller="Blog" asp-action="Index" class="nav-link">NEWS</a></li>
+                                    <li><a asp-controller="Home" asp-action="Contact" class="nav-link">CONTACT</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    @RenderBody()
+
+    <!-- footer -->
+    <footer style="margin-top:100px" class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h2 class="footer-heading mb-4">About Us</h2>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque facere laudantium magnam voluptatum autem. Amet aliquid nesciunt veritatis aliquam.</p>
+                        </div>
+                        <div class="col-md-3 mx-auto">
+                            <h2 class="footer-heading mb-4">Quick Links</h2>
+                            <ul class="list-unstyled">
+                                <li><a asp-controller="Home" asp-action="Signin">Login</a></li>
+                                <li><a asp-controller="Home" asp-action="Register">Register</a></li>
+                                <li><a href="#">Testimonials</a></li>
+                                <li><a href="contact.html">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-4">
+                        <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
+
+
+                        <form method="post" asp-controller="Home" asp-action="Subscrice" novalidate class="footer-subscribe" id="form">
+                            <div class="input-group mb-3">
+                                <input type="email"
+                                       class="form-control border-secondary text-white bg-transparent"
+                                       placeholder="Email address here..."
+                                       name="email"
+                                       id="email"
+                                       aria-label="Enter Email"
+                                       aria-describedby="button-addon2">
+                                <div class="input-group-append">
+                                    <button style="border: 0px solid black;" class="buttondu btn btn-primary text-black" type="submit" id="button-addon2">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="anar12">
+                        <h2 class="footer-heading mb-4" style="margin-top: -5px;">Follow Us</h2>
+                        <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                        <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                        <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                        <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <script src="~/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/jquery.sticky.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="~/libs/jquery-validate/jquery.validate.js"></script>
+    <script src="~/libs/toastr.js/toastr.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#form').validate({
+                errorElement: 'span', // Cixan eror label yox span etdih
+                // errorClass: 'is-invalid', // span error cixan zaman class
+                //  validClass: 'is-valid', // span error cixan zaman class input class
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid').remove('is-valid')// eger error varsa
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-valid').remove('is-invalid') // eger error yoxdusa
+                },
+            });
+        });
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+    $(document).ready(function () {
+    $('#form').submit(function (e) {
+        e.preventDefault();
+    if ($(e.currentTarget).valid() != true)
+    return;
+    const formData = new FormData(e.currentTarget);
+    $.ajax({
+    url: '@Url.Action("Subscrice")', // URL HELPERLER
+    type: 'POST',
+    data: formData,
+    contentType: false,
+    processData: false,
+    success: function (gelenData) {
+    console.log(gelenData);
+        if (gelenData.error == false) {
+        toastr.success(gelenData.massege, 'ugurludur');
+    e.currentTarget.reset(); // FORM BOSALDIR
+    } else {
+        toastr.error(gelenData.massege, 'xeta');
+    }
+    },
+    error: function (gelenData) {
+    console.log(gelenData);
+    toastr.success('Teyin olunmamis xeta bas verib', 'Error');
+    },
+    });
+    });
+      //  const lang = `Context.GetCurrentCulture()`;
+        const text = $(`[data-lang="${lang}"]`).text();
+        $(`[data-lang-viewer="language"]`).text(text);
+        $('[data-lang]').click(function (e) {
+            e.preventDefault();
+            let path = `${window.location.pathname}${window.location.search}`;
+            let selectedlang = $(e.currentTarget).data('lang');
+            let result = /\/(en|az|eu)?\/?(.*)?/.exec(path);
+            if (result != null && result[2] != undefined) {
+                path = `/${selectedlang}/${result[2]}`;
+            }
+            else if (result != null) {
+                path = `/${selectedlang}`;
+            }
+            window.location.href = path;
+        });
+    });
+    </script>
+    @RenderSection("addjs", required: false);
+</body>
+</html>

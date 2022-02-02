@@ -1,0 +1,38 @@
+﻿@model Product
+
+<div class="hero" style="background-image: url('https://preview.colorlib.com/theme/warehouse/images/xhero_1.jpg.pagespeed.ic.aek8z5kvkt.webp'); background-size: cover; height: 600px; background-attachment: fixed;">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div style="margin-top: 270px !important;color: white;font-family:Oswald,sans-serif;
+                font-weight: 300!important;
+                text-transform: uppercase;" class="col-md-5 mx-auto mt-lg-5 text-center">
+                <h1>@Model.Title, @Model.Location</h1>
+                <p class="mb-5"><strong class="text-white">@Model.Price</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-lg-7 details">
+
+            <img src="~/assets/images/@Model.ImagePath" alt="">
+
+        </div>
+
+        <div class="col-lg-5 details">
+
+            <div style="margin-top: 20px;" class="mb-5">
+                <h3 class="text-black mb-4">Property Details</h3>
+                <p style="color:gray;margin-top: 30px;">@Model.Bed Beds, @Model.Baths Baths, @Model.Sqft sqft.</p>
+                <p style="color:gray;margin-top: 30px;">@Model.Description</p>
+                <p style="color:gray;margin-top: 30px;">@Model.ShopDescription</p>
+                <p style="color:gray;margin-top: 30px;" class="mb-4">@Model.ShopDescription</p>
+                <p><a asp-controller="Home" asp-action="Contact"class="btn btn-primary fakingboycik">Contact Agent</a></p>
+            </div>
+
+        </div>
+    </div>
+</div>

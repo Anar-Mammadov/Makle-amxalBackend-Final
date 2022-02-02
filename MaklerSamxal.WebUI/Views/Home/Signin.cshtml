@@ -1,0 +1,55 @@
+﻿
+@model LoginFormModel
+@{ ViewData["Title"] = "Signin"; }
+
+<div class="hero" style="        background-image: url(https://preview.colorlib.com/theme/warehouse/images/xhero_1.jpg.pagespeed.ic.aek8z5kvkt.webp);
+        background-size: cover;
+        height: 600px;
+        background-attachment: fixed;"></div>
+
+
+
+
+
+<div style="background: linear-gradient(#141e30, #243b55);">
+    <div style="background: linear-gradient(#141e30, #243b55);" class="container login">
+        <div class="row">
+            <div class="col-12">
+                <div class="login-box">
+                    <h2>LogIn</h2>
+                    <form method="post">
+
+
+                        @if (!string.IsNullOrWhiteSpace(ViewBag.ms))
+                        {
+                    <div class="form-group mb-3">
+                        <div  style="background-color:red"class="alert alert-danger text-primary">
+                            @ViewBag.ms
+                        </div>
+                    </div>}
+
+                        <div class="user-box">
+                            <input asp-for="UserName"
+                                   placeholder="Name and Email">
+                            <label>Name and Email</label>
+                        </div>
+                        <div class="user-box">
+                            <input asp-for="Password"
+                                   placeholder="Password">
+                            <label>Password</label>
+                        </div>
+                        <a  style="border:0px;background-color:0f1924;width:100%;height: 100%;"href="#">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <button style="background:#101b27;color:white;border:0px;width:100%;height: 100%;"type="submit">SignIn</button>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

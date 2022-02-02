@@ -1,0 +1,46 @@
+﻿@model List<Agent>
+<div class="hero" style="        background-image: url(https://preview.colorlib.com/theme/warehouse/images/xhero_1.jpg.pagespeed.ic.aek8z5kvkt.webp);
+        background-size: cover;
+        height: 600px;
+        background-attachment: fixed;"></div>
+
+
+
+
+<!-- REAL ESTATE AGENTS -->
+
+<section style="margin-top: 100px;" ;" class="site-section" id="agents-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-7 text-left">
+                <h2 class="section-title mb-3">Real Estate Agents</h2>
+                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus minima neque tempora reiciendis.</p>
+            </div>
+        </div>
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="team-member">
+                        <figure>
+                            <ul class="social">
+                                <li><a href="@item.Facebook"><span class="icon-facebook"></span></a></li>
+                                <li><a href="@item.Twitter"><span class="icon-twitter"></span></a></li>
+                                <li><a href="@item.Linkedin"><span class="icon-linkedin"></span></a></li>
+                                <li><a href="@item.Instagram"><span class="icon-instagram"></span></a></li>
+                            </ul>
+                            <img src="~/assets/images/@item.ImagePath" alt="Image" class="img-fluid" data-pagespeed-url-hash="2941781182" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                        </figure>
+                        <div style="background-color:#37cfa2;" class="p-3">
+                            <h3 class="mb-2">@item.FullName</h3>
+                            <span class="position">@item.Position</span>
+                        </div>
+                    </div>
+                </div>
+            }
+
+           
+        </div>
+    </div>
+</section>

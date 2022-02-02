@@ -1,0 +1,226 @@
+﻿
+@model Contact
+
+
+<div class="hero" style="        background-image: url(https://preview.colorlib.com/theme/warehouse/images/xhero_1.jpg.pagespeed.ic.aek8z5kvkt.webp);
+        background-size: cover;
+        height: 600px;
+        background-attachment: fixed;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- CONTCT US -->
+
+<div style="background-color: #f8f9fa!important;" ;">
+    <div class="container">
+        <div class="row ">
+            <div class="col-12 text-center newss">
+                <h2 style="margin-top: 40px;">
+                    CONTCT US
+                </h2>
+            </div>
+        </div>
+        <div style="margin-top: 40px;" class="row">
+            <div class="col-md-7 mb-5">
+
+
+                <form method="post" novalidate id="contact1" class="p-5 bg-white">
+                    <h2 class="h4 text-black mb-5">Get In Touch</h2>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label class="text-black" for="fname">Name</label>
+                            <input asp-for="Name"
+                                   placeholder="NAME"
+                                   data-rule-required="true"
+                                   data-msg-required="Bosh buraxmayin"
+                                   class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label class="text-black" for="email">Email</label>
+                            <input asp-for="Email"
+                                   data-rule-required="true"
+                                   data-msg-required="Bosh buraxmayin"
+                                   data-rule-email="true"
+                                   data-msg-email="Email daxil edin"
+                                   placeholder="EMAIL"
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label class="text-black" for="subject">Subject</label>
+                            <input data-rule-required="true"
+                                   data-msg-required="Bosh buraxmayin"
+                                   asp-for="Subject"
+                                   placeholder="SUBJECT"
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <label class="text-black" for="message">Message</label>
+                            <textarea 
+                                      data-rule-required="true"
+                                      data-msg-required="Bosh buraxmayin"
+                                      class="form-control"
+                                      asp-for="Content"
+                                      rows="5"
+                                      placeholder="CONTENT..."
+                                      cols="30"
+                                      ></textarea>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <input type="submit" value="Send Message" class="btn btn-primary btn-md text-white">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-5">
+                <div class="p-4 mb-3 bg-white">
+                    <p class="mb-0 font-weight-bold">Address</p>
+                    <p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
+                    <p class="mb-0 font-weight-bold">Phone</p>
+                    <p class="mb-4"><a style="color: #37cfa2;" href="#">+994 50 498 77 13</a></p>
+                    <p class="mb-0 font-weight-bold">Email Address</p>
+                    <p class="mb-0"><a style="color: #37cfa2;" href="#">AnarRm@code.edu.az</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section addjs{
+
+    <script src="~/libs/jquery-validate/jquery.validate.js"></script>
+
+   @* <script src="~/libs/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
+
+    <script src="~/libs/toastr.js/toastr.min.js"></script>
+
+    <script>
+
+        toastr.options = {"closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+       
+        $(document).ready(function () {
+
+            $('#contact1').validate({
+
+                errorElement: 'span', 
+             
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid').remove('is-valid')/
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-valid').remove('is-invalid') 
+
+                },
+            });
+
+
+        });
+
+        $(document).ready(function () {
+
+        $('#contact1').submit(function (e) {
+            e.preventDefault() // post dayandiriq
+
+
+            var formData = new FormData(e.currentTarget);
+
+
+            $.ajax({
+
+                url: '@Url.Action("Contact")', // URL HELPERLER
+                type: 'Post',
+                data: formData,
+                contentType: false,
+                processData: false,   //EGER FORM DATA AJAX FORMDATA KIMI GELIRSE FALSE
+                dataType: 'json',
+                beforeSend: function (gelenData) {
+                    console.log("before sending");
+                },
+                success: function (gelenData) {
+                        console.log(gelenData);
+
+                        if (gelenData.error == false) {
+                            toastr.success(gelenData.message, 'ugurludur');
+                            e.currentTarget.reset(); // FORM BOSALDIR
+                            $(e.currentTarget).find('.is-invalid').removeClass('is-invalid');
+                            $(e.currentTarget).find('.is-valid').removeClass('is-valid');
+
+
+
+                        } else {
+                            toastr.error(gelenData.message, 'xeta');
+
+                        }
+                },
+                error: function (gelenData) {
+                        console.log(gelenData);
+                        toastr.success('Teyin olunmamis xeta bas verib', 'Error');
+
+                },
+
+            }).always(function () {
+
+                console.log("after sending");
+
+            });
+
+        });
+    });
+
+    </script>
+
+}
+
+@section addcss{
+
+    <link href="~/libs/toastr.js/toastr.css" rel="stylesheet" />
+
+    <style>
+        .is-invalid {
+            border: 1px solid #dc3545;
+        }
+
+            .is-invalid + span.error {
+                color: red;
+                font-size: 1rem;
+            }
+
+        .is-valid {
+            border: 1px solid teal;
+        }
+    </style>
+}

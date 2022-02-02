@@ -1,0 +1,285 @@
+﻿@model Blog
+
+@{
+    ViewData["Title"] = "Details";
+
+    IEnumerable<BlogPostComment> GetComments(BlogPostComment parent)
+    {
+        if (parent.ParentId != null)
+        {
+            yield return parent;
+        }
+
+        foreach (var item in parent.Children.SelectMany(c => GetComments(c)))
+        {
+            yield return item;
+        }
+    }
+
+}
+<div class="hero" style="        background-image: url(https://preview.colorlib.com/theme/warehouse/images/xhero_1.jpg.pagespeed.ic.aek8z5kvkt.webp);
+        background-size: cover;
+        height: 600px;
+        background-attachment: fixed;">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div style="margin-top: 270px !important;color: white;font-family:Oswald,sans-serif;
+                font-weight: 300!important;
+                text-transform: uppercase;" class="col-md-5 mx-auto mt-lg-5 text-center">
+                <h1>Single Blog Posts</h1>
+                <p class="mb-5"><strong class="text-white">@Model.CreatedData • POSTED BY @Model.Author IN EVENTS</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-8 blog-content blogfuck">
+            <p style="color:gray" class="lead">@Model.Title</p>
+            <p style="color:gray"> @Model.Body</p>
+            <div class="pt-5">
+                <p>Categories: <a href="#" style="color: #37cfa2;">Design</a>, <a href="#" style="color: #37cfa2;">Events</a> Tags: <a href="#" style="color: #37cfa2;">#html</a>, <a href="#" style="color: #37cfa2;">#trends</a></p>
+            </div>
+            <div class="pt-5">
+                <h3 class="mb-5">@Model.Comments.Count()</h3>
+
+                <div class="comments">
+                    <ul id="faking" style="list-style-type:none;margin-left:-38px;margin-top:-190px">
+                        @foreach (var item in Model.Comments?.Where(a => a.ParentId == null))
+                        {
+                            <li style="margin-top:220px" class="comment" id="#c-@item.Id" data-comment-id="@item.Id">
+                                <figure class="comment-media">
+                                    <a href="#">
+                                        <img style="width:50px;height:16%;border-radius:50%;" src="~/assets/images/image-5.jpg" alt="avatar">
+                                    </a>
+                                </figure>
+                                <div style="margin-top:-60px" class="comment-body">
+                                    <div class="comment-user">
+                                        <h4>
+                                            <a style="margin-left:62px;" href="#">
+
+
+                                                @item.CreateByUser.UserName.First().ToString().ToUpper()@item.CreateByUser.UserName.Substring(1)
+
+
+
+
+                                            </a>
+                                        </h4>
+                                        <span style="margin-top:-7px;margin-left:59px;display:inline-block;color:#b7472a" class="comment-date">@item.CreateData.ToShortDateString()</span>
+                                    </div>
+
+                                    <div class="comment-content mb-2">
+                                        <p style="margin-top:7px;margin-left:60px">
+                                            @item.Comment
+                                        </p>
+                                    </div>
+                                    <a style="margin-left:21px" href="#" class="btn btn-link btn-reveal-right btn-comment-reply">
+                                        REPLY<i class="d-icon-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </li>
+                            @foreach (var subComment in GetComments(item))
+                            {
+                                <li class="comment ml-10" id="#c-@subComment.Id" data-comment-id="@subComment.Id">
+                                    <figure class="comment-media">
+                                        <a href="#">
+                                            <img style="width:50px;height:16%;border-radius:50%;margin-left:30px;margin-top:135px" src="~/assets/images/image-6.jpg" alt="avatar">
+                                        </a>
+                                    </figure>
+                                    <div style="margin-top:-60px" class="comment-body">
+                                        <div class="comment-user">
+                                            <h4>
+                                                <a style="margin-left:91px" href="#">
+
+                                                    @item.CreateByUser.UserName.First().ToString().ToUpper()@item.CreateByUser.UserName.Substring(1)
+
+
+
+
+                                                </a>
+                                            </h4>
+                                            <span style="display:inline-block;color:#b7472a;margin-left:91px" class="comment-date">@subComment.CreateData.ToShortDateString()</span>
+
+                                        </div>
+
+                                        <div class="comment-content mb-2">
+                                            @* <a style="margin-left:26px" href="#c-@subComment.ParentId">@@@($"{subComment.Parent.CreateByUser?.UserName}")</a> &nbsp; &nbsp;*@
+                                            <p style="margin-top:7px;margin-left:91px">
+                                                @subComment.Comment
+                                            </p>
+                                        </div>
+                                        <a href="#" class="btn btn-link btn-reveal-right btn-comment-reply">
+                                            REPLY<i class="d-icon-arrow-right"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            }}
+
+
+                    </ul>
+                </div>
+
+
+                <div class="reply">
+                    <form method="post" id="replyForm">
+                        <div id="replyToComment"></div>
+                        <input type="hidden" name="postId" value="@Model.Id" />
+                        <textarea id="fakk" style="border:1px solid beige;display:inline-block;margin-top:115px" name="comment" cols="30" rows="6" class="form-control mb-4"
+                                  placeholder="Comment *" required></textarea>
+                        <button style="margin-top:10px" type="submit" class="btn btn-primary btn-rounded">
+                            POST COMMENT<i class="d-icon-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4 sidebar blogfuck">
+            <div class="sidebar-box">
+                <form action="#" class="search-form">
+                    <div class="form-group">
+                        <span class="icon fa fa-search"></span>
+                        <input style="margin-top: 25px;" type="text" class="form-control" placeholder="Type a keyword and hit enter">
+                    </div>
+                </form>
+            </div>
+            <div class="sidebar-box">
+                <div style="padding: 10px;" class="categories">
+                    <h3 style="color: gray;margin-top: 30px;">Categories</h3>
+                    <li style="list-style-type: none;padding-top: 10px;"><a href="#" style=" color: #37cfa2;">Creatives <span style="margin-left:185px">(12)</span></a></li>
+                    <li style="list-style-type: none;padding-top: 10px;"><a href="#" style=" color: #37cfa2;">News <span style="margin-left:213px">(22)</span></a></li>
+                    <li style="list-style-type: none;padding-top: 10px;"><a href="#" style=" color: #37cfa2;">Design <span style="margin-left:203px">(37)</span></a></li>
+                    <li style="list-style-type: none;padding-top: 10px;"><a href="#" style=" color: #37cfa2;">HTML <span style="margin-left:211px">(42)</span></a></li>
+                    <li style="list-style-type: none;padding-top: 10px;"><a href="#" style=" color: #37cfa2;">Web Development <span style="margin-left:118px">(14)</span></a></li>
+                </div>
+            </div>
+            <div style="margin-top: 50px;" class="sidebar-box">
+                <img src="~/assets/images/image-5.jpg" alt="Image placeholder" class="img-fluid mb-4" data-pagespeed-url-hash="2941781182" onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                <h3 style="color: gray;font-size: 19px;">About The Author</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+                <p><a style="background-color: #37cfa2;border-color: #37cfa2;" href="#" class="btn btn-primary btn-sm">Read More</a></p>
+            </div>
+            <div style="margin-top:50px" class="sidebar-box">
+                <h3 style="color: gray;font-size: 19px;">Paragraph</h3>
+                <p style="margin-top:20px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section addcss
+{
+    <style>
+
+        #faking li:first-child {
+            margin-top: 100px;
+        }
+
+        #replyToComment:not(:empty) {
+            border: 1px solid #1e1e1e;
+            max-width: 100%;
+            color: #999;
+            padding: 20px;
+            margin-left: 0;
+            position: relative;
+            margin-top: 195px;
+            height: 300px;
+            list-style: none;
+        }
+
+            #replyToComment:not(:empty) .comment {
+                margin-top: 0px !important;
+            }
+
+
+        #replyToComment li.comment-sub {
+            margin: 0;
+        }
+
+        #replyToComment .remove-selected-comment {
+            color: red;
+            position: absolute;
+            font-size: 2rem;
+            right: 8px;
+            top: 0;
+            padding: 10px;
+        }
+    </style>
+}
+@section addjs
+{
+    <script>
+        $(document).ready(function () {
+            $(".btn-comment-reply").click(function (e) {
+                e.preventDefault();
+
+                $("#replyToComment").html('<a href="javascript:removeReplySelected()" class="remove-selected-comment">&times;</a>').append($(e.currentTarget).closest(".comment").clone());
+
+            });
+
+            $("#replyForm").submit(function (e) {
+                e.preventDefault();
+
+                let formData = new FormData(e.currentTarget);
+                let toCommentId = $("#replyToComment li.comment").data("comment-id");
+
+                if (toCommentId != undefined) {
+                    formData.set("commentId", toCommentId);
+                }
+                console.log(formData);
+                $.ajax({
+                    url: '@Url.Action("PostComment")',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    dataType:"json",
+                    success: function (response) {
+                        if (response.error == false) {
+                            toastr.success(response.message, "Successfully!")
+                            location.reload();
+                        }
+                        else {
+                            toastr.error(response.message, 'Error!');
+                            location.reload();
+                        }
+                    },
+                    error: function (response) {
+                        if (response.statusText == "parsererror") {
+                            if (toCommentId != undefined) {
+                                $(response.responseText).insertAfter($(`#c-${toCommentId}`));
+
+                                $("#replyToComment").html('');
+                                e.currentTarget.reset();
+                                location.reload();
+                            }
+                            else {
+                                $("div.comments ul").append($(response.responseText));
+                                location.reload();
+                            }
+                            location.reload();
+                        }
+                        location.reload();
+                    }
+
+                })
+
+
+            })
+        })
+
+        function removeReplySelected() {
+            $("#replyToComment").html("");
+        }
+
+
+    </script>
+
+
+}
